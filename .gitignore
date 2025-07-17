@@ -15,10 +15,9 @@ logs/
 .env
 .env.*
 
-# Docker
+
 *.local
-Dockerfile*
-docker-compose*
+
 
 # MongoDB data
 mongo_data/

@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client/cheaptripfe
+    ports:
+      - "8080:80"
+    depends_on:
+      - api-gateway
+
+  api-gateway:
+    build:
+      context: ./server/api-gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-service
+      - booking-service
+      - discounts-service
+      - tours-service
+
+  auth-service:
+    build:
+      context: ./server/auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_auth?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  booking-service:
+    build:
+      context: ./server/booking-service
+    ports:
+      - "3002:3002"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_booking?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  discounts-service:
+    build:
+      context: ./server/discounts-service
+    ports:
+      - "3003:3003"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_discounts?retryWrites=true&w=majority&appName=ClusterCheapTrip
+
+  tours-service:
+    build:
+      context: ./server/tours-service
+    ports:
+      - "3004:3004"
+    environment:
+      - MONGO_URL=mongodb+srv://nguyenhuuluan19092004zz:DtZp6M56ZYgYqprV@clustercheaptrip.fct1xpg.mongodb.net/cheaptrip_tours?retryWrites=true&w=majority&appName=ClusterCheapTrip 
